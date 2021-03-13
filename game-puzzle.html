@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Puzzle</title>
+    <style>
+        img{
+            width: 600px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body>
+    <img onclick = 'flip(this.id),check()' src="Image/cat1.jpg" alt="The image is broken" id=0>
+    <br/>
+    <img onclick = 'flip(this.id),check()' src="Image/cat2.jpg" alt="The image is broken" id=1>
+    <br/>
+    <img onclick = 'flip(this.id),check()' src="Image/cat3.jpg" alt="The image is broken" id=2>
+    <br/>
+    <img onclick = 'flip(this.id),check()' src="Image/cat4.jpg" alt="The image is broken" id=3>
+    <br/>
+    <img onclick = 'flip(this.id),check()' src="Image/cat5.jpg" alt="The image is broken" id=4>
+    <br/>
+</body>
+</html>
+<script>
+    //Xếp link ảnh vào 3 mảng
+    const cat = ['http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/cat1.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/cat2.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/cat3.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/cat4.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/cat5.jpg'];
+
+    const ape = ['http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/ape1.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/ape2.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/ape3.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/ape4.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/ape5.jpg'];
+
+    const bear = ['http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/bear1.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/bear2.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/bear3.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/bear4.jpg',
+        'http://localhost:63342/money-converter.html/Practicejavasrc/game-puzzle/Image/bear5.jpg'];
+
+    //Đổi ảnh random khi click chuột
+    function flip(idNum) {
+        let obj = document.getElementById(idNum).src;
+        console.log(obj);
+        let imgSet = [cat[idNum], ape[idNum], bear[idNum]];
+        let removedIndex = imgSet.indexOf(obj);
+        imgSet.splice(removedIndex, 1);
+        console.log(imgSet);
+        document.getElementById(idNum).src = imgSet[Math.floor(Math.random() * imgSet.length)];
+    }
+
+    //Kiểm tra bộ ảnh
+    function check(){
+        var countCat = 0;
+        var countApe = 0;
+        var countBear = 0;
+        for (let i=0; i<5;i++){
+            let checked = document.getElementById(i).src;
+            if (checked == cat[i]){
+                countCat += 1;
+            } else if (checked == ape[i]){
+                countApe += 1;
+            } else {
+                countBear += 1;
+            }
+        }
+        //In kết quả
+        if (countCat == 5 ){
+            alert('Congratulation, a cat');
+        } else if (countApe == 5){
+            alert('Congratulation, a monkey');
+        } else if (countBear == 5){
+            alert('Congratulation, a panda');
+        }
+    }
+</script>
